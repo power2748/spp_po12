@@ -120,8 +120,8 @@ class BlockedState(ATMState):
 
 
 class ATM:
-    def __init__(self, id, balance):
-        self.id = id
+    def __init__(self, atm_id, balance):
+        self.atm_id = atm_id
         self.balance = balance
         self.daily_limit = 10000
         self.attempts = 0
@@ -147,29 +147,29 @@ class ATM:
         self.state.eject_card()
 
     def status(self):
-        print(f"\nATM {self.id}")
+        print(f"\nATM {self.atm_id}")
         print(f"State: {self.state.__class__.__name__}")
         print(f"Balance: {self.balance}")
         print(f"Attempts: {self.attempts}")
 
 
 if __name__ == "__main__":
-    atm = ATM("ATM001", 5000)
+    atm1 = ATM("ATM001", 5000)
 
-    print("Сценарий 1: Успешная операция")
-    atm.insert_card()
-    atm.enter_pin("1234")
-    atm.withdraw(2000)
-    atm.eject_card()
+    print("=== Сценарий 1: Успешная операция ===")
+    atm1.insert_card()
+    atm1.enter_pin("1234")
+    atm1.withdraw(2000)
+    atm1.eject_card()
 
-    print("\nСценарий 2: Неверный пин")
-    atm.insert_card()
-    atm.enter_pin("0000")
-    atm.enter_pin("1111")
-    atm.enter_pin("2222")
-    atm.insert_card()
+    print("\n=== Сценарий 2: Неверный пин ===")
+    atm1.insert_card()
+    atm1.enter_pin("0000")
+    atm1.enter_pin("1111")
+    atm1.enter_pin("2222")
+    atm1.insert_card()
 
-    print("\nСценарий 3: Снятие больше чем есть")
+    print("\n=== Сценарий 3: Снятие больше чем есть ===")
     atm2 = ATM("ATM002", 1000)
     atm2.insert_card()
     atm2.enter_pin("1234")
@@ -177,7 +177,7 @@ if __name__ == "__main__":
     atm2.withdraw(500)
     atm2.eject_card()
 
-    print("\n Сценарий 4: Пустой банкомат")
+    print("\n=== Сценарий 4: Пустой банкомат ===")
     atm3 = ATM("ATM003", 500)
     atm3.insert_card()
     atm3.enter_pin("1234")
